@@ -25,7 +25,7 @@ module.exports = {
 
             const channel = await interaction.guild.channels.create({
                 name: `문의-${interaction.user.globalName}`, 
-                parent: `1163799226271150231`, 
+                parent: `1264848049512124448`, 
                 type: 0, 
                 topic: `${interaction.user} 님의 티켓입니다. 잠시 후 관리자가 문의/건의사항에 대한 상담을 시작하겠습니다. 잠시만 기다려주세요 👀`,
                 permissionOverwrites: [
