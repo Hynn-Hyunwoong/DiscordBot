@@ -1,7 +1,5 @@
-require('dotenv').config();
 const { EmbedBuilder } = require('discord.js');
-
-// 닉네임 캐시를 저장하기 위한 맵
+const { generalHistoryChannelId, guildId } = require('../../config/environment');
 const nicknameCache = new Map();
 
 module.exports = {
@@ -12,15 +10,14 @@ module.exports = {
      * @param {Client} client
      */
     async run(oldMember, newMember, client) {
-        const oldNickname = nicknameCache.get(oldMember.id) || oldMember.user.username;
-        const newNickname = newMember.nickname || newMember.user.username;
+        const oldNickname = nicknameCache.get(oldMember.id) || oldMember.displayName;
+        const newNickname = newMember.nickname || newMember.displayName;
 
         if (oldNickname !== newNickname) {
-            const logChannelId = process.env.DISCORD_HISTORYCHANNELID;
-            const logChannel = newMember.guild.channels.cache.get(logChannelId);
+            const logChannel = newMember.guild.channels.cache.get(generalHistoryChannelId);
 
             if (!logChannel) {
-                console.error(`Log channel with ID ${logChannelId} not found.`);
+                console.error(`Log channel with ID ${generalHistoryChannelId} not found.`);
                 return;
             }
 
@@ -41,7 +38,6 @@ module.exports = {
         }
     },
     initializeCache: async (client) => {
-        const guildId = process.env.DISCORD_GUILDID;
         const guild = client.guilds.cache.get(guildId);
         if (guild) {
             const members = await guild.members.fetch();

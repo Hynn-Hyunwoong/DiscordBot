@@ -1,6 +1,7 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { mainChannelId, guildId } = require('../config/environment');
 const initializeLogChannel = require('../utils/log');
+const { saveMessageId } = require('../utils/messageStorage');
 
 module.exports = {
     name: 'ready',
@@ -13,8 +14,6 @@ module.exports = {
             console.error(`Guild with ID ${guildId} not found`);
             return;
         }
-
-        console.log(`Checking guild: ${guild.name} (ID: ${guild.id})`);
         try {
             const channel = await guild.channels.fetch(mainChannelId);
             if (channel) {
@@ -43,7 +42,9 @@ module.exports = {
                             .setStyle(ButtonStyle.Primary)
                     );
 
-                await channel.send({ embeds: [embed], components: [row] });
+                const sentMessage = await channel.send({ embeds: [embed], components: [row] });
+                client.lastMessageId = sentMessage.id; // Save the last message ID
+                saveMessageId(client.lastMessageId);
             } else {
                 console.log(`Channel with ID ${mainChannelId} not found in guild: ${guild.name}`);
             }
@@ -51,11 +52,9 @@ module.exports = {
             console.error(`Could not fetch or send message to channel with ID ${mainChannelId}: ${error}`);
         }
 
-        // 별명 캐시 초기화
-        const noticeNicknameUserHandler = require('../handler/noticeNicknameUser');
+        const noticeNicknameUserHandler = require('./nickname/manageNicknameHistory');
         await noticeNicknameUserHandler.initializeCache(client);
 
-        // YouTube 알림 기능 추가
         const noticeYoutubeHandler = require('../handler/youtube/noticeYoutube');
         noticeYoutubeHandler.run(client);
     },

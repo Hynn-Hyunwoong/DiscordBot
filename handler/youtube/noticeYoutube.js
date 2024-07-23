@@ -36,8 +36,6 @@ async function checkNewVideos(client, channelInfo, isPcChannel) {
         const apiKey = getApiKey();
         const now = moment().tz('Asia/Seoul');
         const yesterday = now.clone().subtract(24, 'hours');
-
-        console.log(`Checking videos for channel: ${channelInfo.id} between ${yesterday.format()} and ${now.format()}`);
         const response = await axios.get(`https://www.googleapis.com/youtube/v3/search`, {
             params: {
                 key: apiKey,
@@ -94,7 +92,7 @@ module.exports = {
         console.log('YouTube notifier is ready');
 
         // 매일 KST 17:00에 실행
-        cron.schedule('00 18 * * *', () => {
+        cron.schedule('14 16 * * *', () => {
             checkNewVideos(client, pcYoutubeChannel, true);
             checkNewVideos(client, moYoutubeChannel, false);
         }, {

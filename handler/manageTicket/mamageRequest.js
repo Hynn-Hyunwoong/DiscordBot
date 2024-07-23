@@ -42,7 +42,7 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setTitle(`티켓`)
-                        .setDescription(`${interaction.member.displayName} 님의 티켓\n티켓 종료는 관리자가 합니다. 감사합니다 이것은 테스트`)
+                        .setDescription(`${interaction.member.displayName} 님의 티켓\n티켓 종료는 관리자가 문의사항에 대한 처리를 완료 후 자동으로 종료합니다. 잠시만 기다려주세요 👀`)
                 ],
                 components: [
                     new ActionRowBuilder().setComponents(

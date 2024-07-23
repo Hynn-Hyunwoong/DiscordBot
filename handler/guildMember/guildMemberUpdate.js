@@ -9,17 +9,13 @@ module.exports = {
      */
     async run(oldMember, newMember) {
         if (oldMember.roles.cache.size === newMember.roles.cache.size) return;
-
         const logChannel = newMember.guild.channels.cache.get(generalHistoryChannelId);
-
         if (!logChannel) {
             console.error(`Log channel with ID ${generalHistoryChannelId} not found.`);
             return;
         }
-
         const fetchedLogs = await newMember.guild.fetchAuditLogs({ limit: 1, type: AuditLogEvent.MemberRoleUpdate });
         const deletionLog = fetchedLogs.entries.first();
-
         if (oldMember.roles.cache.size > newMember.roles.cache.size) {
             oldMember.roles.cache.forEach((role) => {
                 if (!newMember.roles.cache.has(role.id)) {

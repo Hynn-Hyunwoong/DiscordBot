@@ -23,7 +23,7 @@ module.exports = {
         const oldContent = oldMessage.content || '없음';
         const newContent = newMessage.content || '없음';
         const messageLink = `https://discord.com/channels/${newMessage.guild.id}/${newMessage.channel.id}/${newMessage.id}`;
-        const editDate = new Date().toLocaleString(); // 수정 날짜와 시간
+        const editDate = new Date().toLocaleString(); 
         const channelLink = `https://discord.com/channels/${newMessage.guild.id}/${newMessage.channel.id}`;
         const authorLink = `https://discord.com/users/${newMessage.author.id}`;
 

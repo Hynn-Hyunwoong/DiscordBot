@@ -9,10 +9,7 @@ module.exports = {
      * @param {Client} client
      */
     async run(reaction, user, client) {
-        console.log(`Reaction removed by ${user.tag} on message ${reaction.message.id}`);
-
         const logChannel = client.channels.cache.get(messageHistoryChannelId);
-
         if (!logChannel) {
             console.error(`Log channel with ID ${messageHistoryChannelId} not found.`);
             return;

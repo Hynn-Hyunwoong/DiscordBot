@@ -8,7 +8,6 @@ module.exports = {
      */
     async run(member) {
         const logChannel = member.guild.channels.cache.get(generalHistoryChannelId);
-
         if (!logChannel) {
             console.error(`Log channel with ID ${generalHistoryChannelId} not found.`);
             return;
@@ -18,7 +17,6 @@ module.exports = {
             const channelLink = `https://discord.com/channels/${member.guild.id}/${generalHistoryChannelId}`;
             const authorLink = `https://discord.com/users/${member.id}`;
             const editDate = new Date().toLocaleString();
-
             const description = `
 [🎉 ${member.guild.name}](${channelLink})에 [@${member.displayName}](${authorLink})님이 추가되었습니다. 🎉 \n 🎉 새로온 사용자에게 권한을 부여했는지 확인해주세요! 🎉
 
