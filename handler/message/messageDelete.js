@@ -1,4 +1,5 @@
 const { Events, EmbedBuilder } = require('discord.js');
+const { messageHistoryChannelId } = require('../../config/environment');
 
 module.exports = {
     name: Events.MessageDelete,
@@ -7,11 +8,10 @@ module.exports = {
      * @param {Client} client
      */
     async run(message, client) {
-        const logChannelId = process.env.DISCORD_MESSAGELOGCHANNELID;
-        const logChannel = client.channels.cache.get(logChannelId);
+        const logChannel = client.channels.cache.get(messageHistoryChannelId);
 
         if (!logChannel) {
-            console.error(`Log channel with ID ${logChannelId} not found.`);
+            console.error(`Log channel with ID ${messageHistoryChannelId} not found.`);
             return;
         }
 

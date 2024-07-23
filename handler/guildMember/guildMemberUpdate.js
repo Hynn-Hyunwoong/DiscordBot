@@ -35,7 +35,7 @@ module.exports = {
                         const target = deletionLog.target;
                         if (target.id === newMember.id && executor.id !== newMember.id) {
                             embed.addFields({
-                                name: '수정유저',
+                                name: '역할을 수정한 관리자는 이사람이에요!',
                                 value: `<@${executor.id}>` + '(`' + executor.id + '`)',
                             });
                         }

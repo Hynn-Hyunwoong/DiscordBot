@@ -50,10 +50,13 @@ module.exports = {
         } catch (error) {
             console.error(`Could not fetch or send message to channel with ID ${mainChannelId}: ${error}`);
         }
-        const noticeNicknameUserHandler = require('../noticeNicknameUser');
+
+        // 별명 캐시 초기화
+        const noticeNicknameUserHandler = require('../handler/noticeNicknameUser');
         await noticeNicknameUserHandler.initializeCache(client);
 
-        const noticeYoutubeHandler = require('./youtube/noticeYoutube');
+        // YouTube 알림 기능 추가
+        const noticeYoutubeHandler = require('../handler/youtube/noticeYoutube');
         noticeYoutubeHandler.run(client);
     },
 };
