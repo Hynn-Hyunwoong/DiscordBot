@@ -14,5 +14,7 @@
     "dotenv": "^16.4.5",
     "moment-timezone": "^0.5.45",
     "node-cron": "^3.0.3"
-  }
+  },
+  "devDependencies": {},
+  "keywords": []
 }

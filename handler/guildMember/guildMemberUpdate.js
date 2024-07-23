@@ -1,5 +1,5 @@
-require('dotenv').config();
 const { Events, EmbedBuilder, GuildMember, AuditLogEvent } = require('discord.js');
+const { generalHistoryChannelId } = require('../../config/environment');
 
 module.exports = {
     name: Events.GuildMemberUpdate,
@@ -10,11 +10,10 @@ module.exports = {
     async run(oldMember, newMember) {
         if (oldMember.roles.cache.size === newMember.roles.cache.size) return;
 
-        const logChannelId = process.env.DISCORD_HISTORYCHANNELID;
-        const logChannel = newMember.guild.channels.cache.get(logChannelId);
+        const logChannel = newMember.guild.channels.cache.get(generalHistoryChannelId);
 
         if (!logChannel) {
-            console.error(`Log channel with ID ${logChannelId} not found.`);
+            console.error(`Log channel with ID ${generalHistoryChannelId} not found.`);
             return;
         }
 
@@ -25,11 +24,11 @@ module.exports = {
             oldMember.roles.cache.forEach((role) => {
                 if (!newMember.roles.cache.has(role.id)) {
                     const embed = new EmbedBuilder()
-                        .setColor('Blue')
-                        .setTitle('멤버 수정')
+                        .setColor('Red')
+                        .setTitle('멤버의 역할이 수정되었어요.')
                         .addFields(
-                            { name: '유저', value: `> ${newMember.displayName}(\`${newMember.id}\`)` },
-                            { name: '역할 삭제', value: `${role}(\`${role.id}\`)` },
+                            { name: '적용받는 사용자는 이사람이에요', value: `> ${newMember.displayName}(\`${newMember.id}\`)` },
+                            { name: '이 역할을 삭제했어요!', value: `${role}(\`${role.id}\`)` },
                         );
                     if (deletionLog) {
                         const executor = deletionLog.executor;
@@ -49,17 +48,17 @@ module.exports = {
                 if (!oldMember.roles.cache.has(role.id)) {
                     const embed = new EmbedBuilder()
                         .setColor('Blue')
-                        .setTitle('멤버 수정')
+                        .setTitle('멤버의 역할이 수정되었어요.')
                         .addFields(
-                            { name: '유저', value: `> ${newMember.displayName}(\`${newMember.id}\`)` },
-                            { name: '역할 추가', value: `${role}(\`${role.id}\`)` },
+                            { name: '적용받는 사용자는 이사람이에요', value: `> ${newMember.displayName}(\`${newMember.id}\`)` },
+                            { name: '이 역할을 추가했어요!', value: `${role}(\`${role.id}\`)` },
                         );
                     if (deletionLog) {
                         const executor = deletionLog.executor;
                         const target = deletionLog.target;
                         if (target.id === newMember.id && executor.id !== newMember.id) {
                             embed.addFields({
-                                name: '수정유저',
+                                name: '역할을 수정한 관리자는 이사람이에요!',
                                 value: `<@${executor.id}>` + '(`' + executor.id + '`)',
                             });
                         }

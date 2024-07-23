@@ -1,5 +1,5 @@
-
 const { Events, ButtonInteraction } = require('discord.js');
+const { adminId } = require('../../config/environment');
 
 module.exports = {
     name: Events.InteractionCreate,
@@ -9,7 +9,7 @@ module.exports = {
      */
     async run(interaction) {
         if (interaction.customId !== 'delete') return;
-        if (!interaction.member.roles.cache.get('662666082410037258')) {
+        if (!interaction.member.roles.cache.get(adminId)) {
             await interaction.reply({ content: '관리자만 이 작업을 수행할 수 있습니다.', ephemeral: true });
             return;
         }
