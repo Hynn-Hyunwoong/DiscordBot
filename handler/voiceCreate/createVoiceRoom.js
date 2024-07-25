@@ -13,9 +13,9 @@ const voiceChannelNames = [
 
 module.exports = async function handleSpecialChannel(newState, specialVoiceChannelId) {
     try {
-        const randomName = voiceChannelNames[Math.floor(Math.random() * voiceChannelNames.length)];
-        const channelName = `🔊 ${newState.member.displayName}${randomName}`;
-
+        // const randomName = voiceChannelNames[Math.floor(Math.random() * voiceChannelNames.length)];
+        // const channelName = `🔊 ${newState.member.displayName}${randomName}`;
+        const channelName = `🔊 ${newState.member.displayName}`;
         const newChannel = await newState.guild.channels.create({
             name: channelName,
             type: ChannelType.GuildVoice,

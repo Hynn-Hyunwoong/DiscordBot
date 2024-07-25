@@ -23,7 +23,7 @@ module.exports = {
                         .setColor('Red')
                         .setTitle('멤버의 역할이 수정되었어요.')
                         .addFields(
-                            { name: '적용받는 사용자는 이사람이에요', value: `> ${newMember.displayName}(\`${newMember.id}\`)` },
+                            { name: '적용받는 사용자는 이사람이에요', value: `<@${newMember.id}> <${newMember.id}> (\`${newMember.displayName}\`)` },
                             { name: '이 역할을 삭제했어요!', value: `${role}(\`${role.id}\`)` },
                         );
                     if (deletionLog) {
@@ -46,7 +46,7 @@ module.exports = {
                         .setColor('Blue')
                         .setTitle('멤버의 역할이 수정되었어요.')
                         .addFields(
-                            { name: '적용받는 사용자는 이사람이에요', value: `> ${newMember.displayName}(\`${newMember.id}\`)` },
+                            { name: '적용받는 사용자는 이사람이에요', value: `<@${newMember.id}> <${newMember.id}> (\`${newMember.displayName}\`)` },
                             { name: '이 역할을 추가했어요!', value: `${role}(\`${role.id}\`)` },
                         );
                     if (deletionLog) {
