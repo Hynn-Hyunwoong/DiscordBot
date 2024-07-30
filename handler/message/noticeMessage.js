@@ -59,7 +59,7 @@ async function sendDailyNotification(client) {
             .setTimestamp(new Date())
             .setFooter({ text: '토핑봇 by. 🔔 주간체크리스트 도우미 🎅' })
             .addFields(
-                { name: '<:star_3:1216740965323378719> 길드 ', value: '1️⃣ 길드 출석 체크(실링기부➕연구지원)\n2️⃣ 길드 혈석상점 교환', inline: false },
+                { name: '<:star_3:1216740965323378719> 길드 ', value: '1️⃣ 길드 출석 체크(실링기부+연구지원)\n2️⃣ 길드 혈석상점 교환', inline: false },
                 { name: '<:star_2:1216742007188492288>  주간 체크 리스트', value: '1️⃣ 싱글모드 교환\n2️⃣ 주간 승리의 빛(카양겔) 보석 교환\n3️⃣ 베히모스 주간 4티어 재료교환', inline: false }
             );
 
